@@ -122,7 +122,7 @@ export async function generateFashionVideo(
     config: {
       numberOfVideos: 1,
       aspectRatio: '9:16',
-      personGeneration: 'allow_all',
+      personGeneration: 'allow_adult',
     },
   });
 
