@@ -118,4 +118,4 @@ fashion-studio/
 
 ## License
 
-Private project.
+This project is licensed under the [MIT License](LICENSE).
