@@ -31,6 +31,7 @@ const App: React.FC = () => {
     setGeneratedImage(null);
     setGeneratedVideo(null);
     setError(null);
+    setVideoError(null);
   };
 
   const handleReferenceImagesSelect = (images: string[]) => {
@@ -44,6 +45,7 @@ const App: React.FC = () => {
     setLoading(true);
     setError(null);
     setGeneratedVideo(null);
+    setVideoError(null);
 
     try {
       const result = await generateFashionEdit(originalImage, prompt, referenceImages, imageModel);
@@ -59,20 +61,27 @@ const App: React.FC = () => {
   };
 
   const handleGenerateVideo = async () => {
+    console.log('[App] handleGenerateVideo called', { generatedImage: !!generatedImage, videoModel });
     const promptToUse = appliedPrompt || prompt;
     const finalPrompt = promptToUse || 'high quality street fashion, cinematic lighting, 4k';
 
-    if (!generatedImage) return;
+    if (!generatedImage) {
+      console.warn('[App] No generated image, aborting video generation');
+      return;
+    }
 
     setVideoLoading(true);
     setVideoError(null);
 
     try {
+      console.log('[App] Starting video generation...');
       const operationId = await generateFashionVideo(generatedImage, finalPrompt, videoModel);
+      console.log('[App] Got operationId:', operationId);
       const videoUrl = await pollVideoUntilComplete(operationId, undefined, 10000, 30);
       setGeneratedVideo(videoUrl);
       setVideoError(null);
     } catch (err: unknown) {
+      console.error('[App] Video generation error:', err);
       const errorMessage = err instanceof Error ? err.message : 'Video production failed.';
       setVideoError(errorMessage);
     } finally {
