@@ -40,6 +40,9 @@ AI-powered fashion simulation app. Upload your full-body photo, describe a style
 ### Installation
 
 ```bash
+git clone https://github.com/midasol/fashion-studio.git
+cd fashion-studio
+
 # Install all dependencies (root, backend, frontend)
 npm run install:all
 ```
