@@ -122,6 +122,7 @@ export async function generateFashionVideo(
     config: {
       numberOfVideos: 1,
       aspectRatio: '9:16',
+      personGeneration: 'allow_all',
     },
   });
 
@@ -164,6 +165,9 @@ export async function getVideoStatus(
       return { status: 'processing' };
     }
 
+    // Debug: log the full operation response to understand structure
+    console.log('[VideoStatus] Operation done. Response:', JSON.stringify(operation, null, 2));
+
     if (operation.error) {
       videoOperations.delete(operationId);
       return {
@@ -172,13 +176,24 @@ export async function getVideoStatus(
       };
     }
 
+    // Check for RAI filtering
     const response = operation.response as {
       generatedVideos?: Array<{
         video?: {
           uri?: string;
         };
       }>;
+      raiMediaFilteredCount?: number;
+      raiMediaFilteredReasons?: string[];
     };
+
+    if (response?.raiMediaFilteredCount && response.raiMediaFilteredCount > 0) {
+      videoOperations.delete(operationId);
+      return {
+        status: 'failed',
+        error: `Video was filtered by safety policy: ${(response.raiMediaFilteredReasons || []).join(', ')}`,
+      };
+    }
 
     if (
       response &&
