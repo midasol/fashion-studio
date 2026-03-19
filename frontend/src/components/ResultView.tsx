@@ -397,7 +397,7 @@ const ResultView: React.FC<ResultViewProps> = ({
               </>
             ) : isVideoGenerating ? (
               // Dedicated Loading State
-              <div className="text-center max-w-md p-8 flex flex-col items-center animate-in fade-in duration-500">
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-md mx-auto p-8 animate-in fade-in duration-500">
                 <div className="relative mb-6">
                   <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center text-blue-500">
                     <Video size={32} />
@@ -416,7 +416,7 @@ const ResultView: React.FC<ResultViewProps> = ({
               </div>
             ) : videoError ? (
               // Error State with Retry
-              <div className="text-center max-w-md p-6">
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-md mx-auto p-6">
                 <div className="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-red-500">
                   <AlertTriangle size={32} />
                 </div>
@@ -439,7 +439,7 @@ const ResultView: React.FC<ResultViewProps> = ({
               </div>
             ) : (
               // Initial State (if navigated to tab manually)
-              <div className="text-center max-w-md p-6">
+              <div className="flex-grow flex flex-col items-center justify-center text-center max-w-md mx-auto p-6">
                 <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-500">
                   <Video size={32} />
                 </div>

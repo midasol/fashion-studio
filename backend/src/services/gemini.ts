@@ -1,4 +1,4 @@
-import { GoogleGenAI, Modality } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 import { getCachedSettings, DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL } from '../config.js';
 import type { ImageModelId, VideoModelId } from '../config.js';
 
@@ -71,7 +71,7 @@ export async function generateFashionEdit(
     model: imageModel,
     contents: contents,
     config: {
-      responseModalities: [Modality.TEXT, Modality.IMAGE],
+      responseModalities: ['TEXT', 'IMAGE'],
     },
   });
 
