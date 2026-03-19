@@ -223,7 +223,7 @@ const ResultView: React.FC<ResultViewProps> = ({
 
       {/* Image/Video Container */}
       <div className="flex-grow bg-white rounded-2xl border border-gray-200 overflow-hidden relative shadow-sm min-h-[400px] flex items-center justify-center group">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
 
         {activeTab === 'generated' && (
           <div className="w-full h-full flex flex-col">
